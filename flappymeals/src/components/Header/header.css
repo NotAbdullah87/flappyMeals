@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+
+body{
+    font-family: 'Jomhuria';
+}
+
+.css-1q39md6-MuiButtonBase-root-MuiButton-root{
+    color : "black"
+}
+
+.sign-up-button{
+    background-color: '#D91919';
+
+}
+
+#sign-up-button:hover{
+  background-color: '#D91919';
+}

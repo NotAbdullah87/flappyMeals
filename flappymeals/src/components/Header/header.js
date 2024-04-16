@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import './header.css'
+
 
 const pages = ['Home', 'Get Started', 'Sign Up/Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,7 +41,6 @@ function ResponsiveAppBar() {
     <AppBar position="static" style={{backgroundColor:"white",boxShadow:"none",color:"#D91919"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -49,8 +50,13 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               textDecoration:"none",
-              color:"inherit"
+              color:"inherit",
+              fontFamily:"Jomhuria",
+              pl:"37px",
+              pt : "20px"
             }}
+            
+           style={{fontFamily:"Jomhuria",fontSize:"50px"}}
           >
             Flappy Meals
           </Typography>
@@ -62,7 +68,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="#00000"
             >
               <MenuIcon />
             </IconButton>
@@ -82,16 +88,21 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                
+                color:"black"
               }}
+              
+              stlye={{color:"black",fontFamily:"Jomhuria"}}           
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} style={{color:"inherit"}}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+      
+                </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
           <Typography
             variant="h5"
             noWrap
@@ -101,31 +112,57 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'Jomhuria',
+              fontWeight: 600,
+              letterSpacing: '.2rem',
               color: 'inherit',
+              fontSize:40,
               textDecoration: 'none',
             }}
+        
           >
-            LOGO
+            Flappy Meals
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },pl:80 }}>
+          
               <Button
-                key={page}
+               
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block',ml:10}}
+                style={{color:"inherit",fontWeight:900}}
+                
               >
-                {page}
+             Home
               </Button>
-            ))}
+           
+              <Button
+               
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',ml:10}}
+                style={{color:"inherit",fontWeight:900}}
+                
+              >
+           Get Started
+              </Button>
+           
+              <Button
+                style={{color:"white",fontWeight:900}}
+               id='sign-up-button'
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',ml:7
+              ,backgroundColor:'#D91919',borderRadius:30,width:"30%"}}
+              
+                
+              >
+             Sign Up / Login
+              </Button>
+           
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              
               </IconButton>
             </Tooltip>
             <Menu
@@ -136,6 +173,7 @@ function ResponsiveAppBar() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
+              style={{color:'black'}}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
@@ -143,6 +181,7 @@ function ResponsiveAppBar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              color
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
