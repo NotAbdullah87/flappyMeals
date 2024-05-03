@@ -123,7 +123,7 @@ function ResponsiveAppBar() {
           >
             Flappy Meals
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },pl:80 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },pl:60 }}>
           
               <Button
                
