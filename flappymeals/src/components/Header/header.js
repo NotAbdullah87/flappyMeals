@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 import './header.css'
 
 
@@ -58,7 +59,7 @@ function ResponsiveAppBar() {
             
            style={{fontFamily:"Jomhuria",fontSize:"50px"}}
           >
-            Flappy Meals
+            <Link style={{textDecoration:"none",color:"#D91919"}} to={'/'}>Flappy Meals</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,12 +95,17 @@ function ResponsiveAppBar() {
               
               stlye={{color:"black",fontFamily:"Jomhuria"}}           
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} style={{color:"inherit"}}>
-                  <Typography textAlign="center">{page}</Typography>
+              <MenuItem onClick={handleCloseNavMenu} style={{color:"inherit"}}>
+                  <Typography textAlign="center"> <Link style={{textDecoration:"none",color:"black"}} to={'/'}>Home</Link></Typography>
                 </MenuItem>
-              ))}
       
+                <MenuItem onClick={handleCloseNavMenu} style={{color:"inherit"}}>
+                  <Typography textAlign="center"> <Link style={{textDecoration:"none",color:"black"}} to={'/'}>Get Started</Link></Typography>
+                </MenuItem>
+
+                <MenuItem onClick={handleCloseNavMenu} style={{color:"inherit"}}>
+                  <Typography textAlign="center"> <Link style={{textDecoration:"none",color:"black"}} to={'/login'}>SignUp/Login</Link></Typography>
+                </MenuItem>
                 </Menu>
           </Box>
           
@@ -121,7 +127,7 @@ function ResponsiveAppBar() {
             }}
         
           >
-            Flappy Meals
+           <Link style={{textDecoration:"none",color:"#D91919"}} to={'/'}>Flappy Meals</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },pl:60 }}>
           
@@ -132,7 +138,7 @@ function ResponsiveAppBar() {
                 style={{color:"inherit",fontWeight:900}}
                 
               >
-             Home
+             <Link style={{textDecoration:"none",color:"#D91919"}} to={'/'}>Home</Link>
               </Button>
            
               <Button
@@ -142,19 +148,19 @@ function ResponsiveAppBar() {
                 style={{color:"inherit",fontWeight:900}}
                 
               >
-           Get Started
+           <Link style={{textDecoration:"none",color:"#D91919"}} to={'/login'}>Get Started</Link>
               </Button>
            
               <Button
                 style={{color:"white",fontWeight:900}}
                id='sign-up-button'
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',ml:7
-              ,backgroundColor:'#D91919',borderRadius:30,width:"30%"}}
-              
+                sx={{ my: 2, color: 'white', display: 'block',ml:7, backgroundColor:'#D91919' , "&:hover":{backgroundColor:"black"}
+              ,borderRadius:30,width:"30%"}}
+          
                 
               >
-             Sign Up / Login
+             <Link style={{textDecoration:"none",color:"white"}} to={'/login'}>Sign Up / Login</Link>
               </Button>
            
           </Box>

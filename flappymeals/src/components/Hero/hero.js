@@ -3,13 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Image from './image.jpg'; 
-import MobileImage from './mobile.png'; 
+import Image from './Vector.png'; 
+import MobileImage from './mobile.png';
+import 'animate.css' 
 function Hero() {
   return (
     <Box sx={{ position: 'relative', backgroundColor: 'white' }}>
       <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: { xs: 6, md: 10 }, flexDirection: { xs: 'column', md: 'row' } }}>
-        <Box sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, textAlign: { xs: 'center', md: 'left' }, mb: { xs: 4, md: 0 } }}>
+        <Box class="animate__animated animate__slideInLeft" sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, textAlign: { xs: 'center', md: 'left' }, mb: { xs: 4, md: 0 } }}>
           <Typography variant="h3" color="black" fontWeight="bold" gutterBottom style={{ fontFamily: 'Josefin Sans' }}>
             Food Delivery
           </Typography>
@@ -32,8 +33,8 @@ function Hero() {
             Work with us
           </Button>
         </Box>
-        <Box sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, position: 'relative', textAlign: { xs: 'center', md: 'right' } }}>
-          <img src={Image} alt="Delivery" style={{ width: '100%', height: 'auto' }} />
+        <Box  sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, position: 'relative', textAlign: { xs: 'center', md: 'right' } }}>
+          <img className='animate__animated animate__fadeInUp' src={Image} alt="Delivery" style={{ width: '100%', height: 'auto' }} />
           <img src={MobileImage} alt="Mobile" style={{ position: 'absolute', top: '94%', left: '-90%', width: 'auto', height: '400px', zIndex: 1 }} />
         </Box>
       </Container>
