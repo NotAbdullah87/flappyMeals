@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './components/login/login'
 import UserDashboard from './components/userDashboard/userDashboard';
+import ViewItems from './components/viewItemsPage/viewItems';
+import ProductDetailPage from './components/ProductDetailPage/ProductDetailPage';
+import Cart from './components/cart/cart';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -22,6 +25,17 @@ const router = createBrowserRouter([
     path : "/userDashboard",
     element : <UserDashboard/>,
   },
+  {
+    path : "/userDashboard/viewItems",
+    element : <ViewItems />
+  },
+  {
+    path : "/userDashboard/viewItems/:ItemId",
+    element : <ProductDetailPage />
+  },{
+    path :"/userDashboard/viewCart",
+    element : <Cart/> 
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
