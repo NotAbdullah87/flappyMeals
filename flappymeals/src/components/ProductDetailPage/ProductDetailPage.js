@@ -71,7 +71,7 @@ const addToCart = (item,q) => {
             </Typography>
           
             <Typography variant="h6" gutterBottom sx={{mb:3,mt:4,fontFamily:"Josefin Sans",fontWeight:900,color:"white",width:"10rem",borderRadius:"15px",padding:"4px",textAlign:"center",backgroundColor:"#D91919"}}>
-              Price: ${price}
+              Price: Rs {price}
             </Typography>
             <TextField
               id="quantity"

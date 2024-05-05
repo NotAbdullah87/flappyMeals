@@ -6,7 +6,16 @@ import Typography from '@mui/material/Typography';
 import Image from './Vector.png'; 
 import MobileImage from './mobile.png';
 import 'animate.css' 
+import { useEffect } from 'react';
 function Hero() {
+
+  useEffect(() => {
+
+    localStorage.clear();
+  }, []);
+
+
+
   return (
     <Box sx={{ position: 'relative', backgroundColor: 'white' }}>
       <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: { xs: 6, md: 10 }, flexDirection: { xs: 'column', md: 'row' } }}>

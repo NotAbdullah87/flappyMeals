@@ -8,7 +8,7 @@ import ViewItems from './components/viewItemsPage/viewItems';
 import ProductDetailPage from './components/ProductDetailPage/ProductDetailPage';
 import Cart from './components/cart/cart';
 import RiderDashboard from './components/RiderDashboard/RiderDashboard';
-
+import RiderLogin from './components/login/RiderLogin';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -46,6 +46,10 @@ const router = createBrowserRouter([
   {
     path : "/CompletedOrders",
     element : <CompletedOrders/>,
+  },
+  {
+    path : "/login/RiderLogin",
+    element : <RiderLogin />
   }
 ]);
 

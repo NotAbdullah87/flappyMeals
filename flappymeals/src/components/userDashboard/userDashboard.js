@@ -1,33 +1,87 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '..//Footer/footer';
 import { Container,Typography,TextField,Grid,Button,Paper, SvgIcon } from '@mui/material';
 import UserDashboardHeader from '../userDashboardHeader/userDashboardHeader';
 import Love from './love.svg'
 import { Products } from '../products/products'; 
 import { Link } from 'react-router-dom';
-const foodItems = [
-    { id: 1, name: 'Burger', description: 'Delicious burger with cheese and fries', imageUrl: 'https://i.ibb.co/7S4Sq9m/burger.png',price:250 },
-    { id: 2, name: 'Pizza', description: 'Tasty pizza with various toppings', imageUrl: 'https://i.ibb.co/Np6Lgxy/pizza.png',price :200 },
-    { id: 3, name: 'Sandwitch', description: 'Fresh Salad with lettuce and BBQ Chicken', imageUrl: 'https://i.ibb.co/DC34CdZ/sandwich.png', price :150},
-    { id: 4, name: 'Biryani', description: 'Mouthwatering Half Chicken Biryani', imageUrl: 'https://i.ibb.co/WKsjWyT/biryani.png',price : 250 },
-    { id: 5, name: 'Banana Shake', description: 'Fresh Banana Shake', imageUrl: 'https://i.ibb.co/5k8YMCP/banana-Shake.png',price : 160 },
-    { id: 6, name: 'Masala Lays ', description: 'Masala Lays', imageUrl: 'https://i.ibb.co/xfxkfMz/lays.png', price : 50 },
-  ];
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// const foodItems = [
+//     { id: 1, name: 'Burger', description: 'Delicious burger with cheese and fries', imageUrl: 'https://i.ibb.co/7S4Sq9m/burger.png',price:250 },
+//     { id: 2, name: 'Pizza', description: 'Tasty pizza with various toppings', imageUrl: 'https://i.ibb.co/Np6Lgxy/pizza.png',price :200 },
+//     { id: 3, name: 'Sandwitch', description: 'Fresh Salad with lettuce and BBQ Chicken', imageUrl: 'https://i.ibb.co/DC34CdZ/sandwich.png', price :150},
+//     { id: 4, name: 'Biryani', description: 'Mouthwatering Half Chicken Biryani', imageUrl: 'https://i.ibb.co/WKsjWyT/biryani.png',price : 250 },
+//     { id: 5, name: 'Banana Shake', description: 'Fresh Banana Shake', imageUrl: 'https://i.ibb.co/5k8YMCP/banana-Shake.png',price : 160 },
+//     { id: 6, name: 'Masala Lays ', description: 'Masala Lays', imageUrl: 'https://i.ibb.co/xfxkfMz/lays.png', price : 50 },
+//   ];
 
-  const orders = [
-    { orderNumber: 'ORD001', productName: 'Burger',orderStatus:"In Progress"},
-    { orderNumber: 'ORD002', productName: 'Pizza',orderStatus:"Delivered"},
-  ];
+  // const orders = [
+  //   { orderNumber: 'ORD001', productName: 'Burger',orderStatus:"In Progress"},
+  //   { orderNumber: 'ORD002', productName: 'Pizza',orderStatus:"Delivered"},
+  // ];
 
-  
+
   function displayProductDetailPage(name){
     console.log(name)
   }
 
 
-  const userDashboard = () => {
+  const UserDashboard = () => {
+    let [orders,setCurrentOrders] = useState([]); 
+    const [foodItems, setFoodItems] = useState([]);
+    let navigate = useNavigate(); 
+    useEffect(() => {
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      if(!user){
+        console.log("User Not Found");
+        navigate('/login')
+      }
+        // Fetch items from the API
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get('http://localhost:5038/items');
+                setFoodItems(response.data);
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
+
+        fetchItems();
+
+
+        const getCurrentOrders = async (customerId) => {
+          try {
+            customerId = JSON.parse(localStorage.getItem("user"));
+            console.log(customerId.username);
+            customerId = customerId.username;
+            // customerId = "21L1790";
+              // Send a POST request to the orders endpoint with the customerId in the body
+              const response = await axios.post('http://localhost:5038/CurrentOrderForUser', { customerId });
+              
+              // Save the returned orders in the currentOrders array
+              const currentOrders = response.data;
+              setCurrentOrders(response.data);
+              
+              // Optionally, do something with the currentOrders array
+              console.log("Current Orders:", currentOrders);
+              
+              return currentOrders;
+          } catch (error) {
+              console.error("Error retrieving current orders:", error);
+              return [];
+          }
+      };
+
+      getCurrentOrders();
+    }, []);
+
+    console.log(foodItems);
+
   return (
-    <div>
+    foodItems && <div>
         {/* <Header/> */}
 
         <UserDashboardHeader />
@@ -125,7 +179,7 @@ const foodItems = [
             <div key={index} style={{backgroundColor:"#FD6C6C",color:"black",fontFamily:"Josefin Sans",padding:"10px",width:"50vw",fontWeight:900,borderRadius:"25px",marginBottom :"10px"}}>
               {/* Display order details */}
               <Typography variant="body1" sx={{fontFamily:"Josefin Sans",fontWeight:900,color:'white'}}>
-                Order #{index + 1}: {order.orderNumber} - {order.productName} | {order.orderStatus}
+                Order #{index + 1}: {order.orderId} - PKR{order.totalPrice} | {order.orderStatus} |
               </Typography>
             </div>
           ))}
@@ -144,4 +198,4 @@ const foodItems = [
   )
 }
 
-export default userDashboard
+export default UserDashboard

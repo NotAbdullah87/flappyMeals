@@ -1,18 +1,40 @@
 import React from 'react'
 import { Container,Typography,TextField,Grid,Button,Paper, SvgIcon } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const foodItems = [
-    { id: 1, name: 'Burger', description: 'Delicious burger with cheese and fries', imageUrl: 'https://i.ibb.co/7S4Sq9m/burger.png',price:250 },
-    { id: 2, name: 'Pizza', description: 'Tasty pizza with various toppings', imageUrl: 'https://i.ibb.co/Np6Lgxy/pizza.png',price :200 },
-    { id: 3, name: 'Sandwitch', description: 'Fresh Salad with lettuce and BBQ Chicken', imageUrl: 'https://i.ibb.co/DC34CdZ/sandwich.png', price :150},
-    { id: 4, name: 'Biryani', description: 'Mouthwatering Half Chicken Biryani', imageUrl: 'https://i.ibb.co/WKsjWyT/biryani.png',price : 250 },
-    { id: 5, name: 'Banana Shake', description: 'Fresh Banana Shake', imageUrl: 'https://i.ibb.co/5k8YMCP/banana-Shake.png',price : 160 },
-    { id: 6, name: 'Masala Lays ', description: 'Masala Lays', imageUrl: 'https://i.ibb.co/xfxkfMz/lays.png', price : 50 },
-  ];
+// const foodItems = [
+//     { id: 1, name: 'Burger', description: 'Delicious burger with cheese and fries', imageUrl: 'https://i.ibb.co/7S4Sq9m/burger.png',price:250 },
+//     { id: 2, name: 'Pizza', description: 'Tasty pizza with various toppings', imageUrl: 'https://i.ibb.co/Np6Lgxy/pizza.png',price :200 },
+//     { id: 3, name: 'Sandwitch', description: 'Fresh Salad with lettuce and BBQ Chicken', imageUrl: 'https://i.ibb.co/DC34CdZ/sandwich.png', price :150},
+//     { id: 4, name: 'Biryani', description: 'Mouthwatering Half Chicken Biryani', imageUrl: 'https://i.ibb.co/WKsjWyT/biryani.png',price : 250 },
+//     { id: 5, name: 'Banana Shake', description: 'Fresh Banana Shake', imageUrl: 'https://i.ibb.co/5k8YMCP/banana-Shake.png',price : 160 },
+//     { id: 6, name: 'Masala Lays ', description: 'Masala Lays', imageUrl: 'https://i.ibb.co/xfxkfMz/lays.png', price : 50 },
+//   ];
 
 
 export const Products = () => {
+
+  const [foodItems, setFoodItems] = useState([]);
+
+  useEffect(() => {
+      // Fetch items from the API
+      const fetchItems = async () => {
+          try {
+              const response = await axios.get('http://localhost:5038/items');
+              setFoodItems(response.data);
+          } catch (error) {
+              console.error('Error fetching items:', error);
+          }
+      };
+
+      fetchItems();
+  }, []);
+
+
+
   return (
     <div>    
 
