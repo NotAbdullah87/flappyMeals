@@ -7,10 +7,13 @@ import UserDashboard from './components/userDashboard/userDashboard';
 import ViewItems from './components/viewItemsPage/viewItems';
 import ProductDetailPage from './components/ProductDetailPage/ProductDetailPage';
 import Cart from './components/cart/cart';
+import RiderDashboard from './components/RiderDashboard/RiderDashboard';
+
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import CompletedOrders from './components/CompletedOrders/CompletedOrders';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,14 @@ const router = createBrowserRouter([
   },{
     path :"/userDashboard/viewCart",
     element : <Cart/> 
+  },
+  {
+    path : "/RiderDashboard",
+    element : <RiderDashboard/>,
+  },
+  {
+    path : "/CompletedOrders",
+    element : <CompletedOrders/>,
   }
 ]);
 

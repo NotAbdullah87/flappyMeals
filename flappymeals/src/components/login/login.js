@@ -62,7 +62,7 @@ const Login = () => {
            
             style={{ margin: '24px 0 16px',backgroundColor:"#D91919" , '&:hover':{backgroundColor :"black"} }}
           >
-            <Link to = {'/userDashboard'} style={{textDecoration:"none",color:"white"}}>Sign In</Link>
+            <Link to = {'/RiderDashboard'} style={{textDecoration:"none",color:"white"}}>Sign In</Link>
           </Button>
         </form>
       </Paper>
