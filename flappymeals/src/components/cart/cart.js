@@ -10,6 +10,9 @@ const Cart = () => {
   const [pickupLocation, setPickupLocation] = useState('');
   const [destinationLocation, setDestinationLocation] = useState('');
   const [specialInstructions, setSpecialInstructions] = useState('');
+  const [orderS , setorderS] = useState("failed"); 
+
+
   let userId = JSON.parse(localStorage.getItem("user"));
   userId = userId.username;
   // Function to remove item from cart
@@ -33,7 +36,7 @@ const Cart = () => {
   
 
   // Generate and log the orderId with a custom prefix
-  console.log(generateCustomOrderId(userId.substring(3,6))); // Example with custom prefix "ABC"
+  // console.log(generateCustomOrderId(userId.substring(3,6))); // Example with custom prefix "ABC"
 
   function getCurrentDate() {
     // Get current date components
@@ -47,7 +50,7 @@ const Cart = () => {
   }
   
   // Call the function to get the current date and log it
-  console.log(getCurrentDate());
+  // console.log(getCurrentDate());
 
 
   function getCurrentTime() {
@@ -62,7 +65,7 @@ const Cart = () => {
   }
   
   // Call the function to get the current time and log it
-  console.log(getCurrentTime());
+  // console.log(getCurrentTime());
 
   // Function to handle checkout
   const handleCheckout = async () => {
@@ -78,7 +81,8 @@ const Cart = () => {
         itemId: item.id,
         itemName: item.name,
         quantity: item.quantity,
-        pricePerItem: item.price
+        pricePerItem: item.price,
+        ImageUrl:item.image,
       }));
   
       const orderData = {
@@ -97,6 +101,13 @@ const Cart = () => {
       const response = await axios.post('http://localhost:5038/saveOrder', orderData);
   
       console.log('Order saved successfully:', response.data);
+
+      if(response.data){
+        // setCartItems([]);
+        setCartItems([]);
+        // localStorage.setItem('cartItems',[]);
+        localStorage.removeItem('cartItems');
+      }
       // You can handle the response as needed, such as displaying a success message to the user or redirecting to another page
     } catch (error) {
       console.error('Error saving order:', error);

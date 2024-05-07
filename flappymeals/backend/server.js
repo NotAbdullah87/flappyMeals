@@ -32,7 +32,7 @@ app.get("/items", async (req, res) => {
         collection = database.collection("items");
         // Retrieve items from the MongoDB collection
         const items = await collection.find({}).toArray();
-        console.log(items);
+        // console.log(items);
         // Send the items as a response
         console.log("getItems() Function");
         res.json(items);
@@ -129,6 +129,46 @@ app.post("/saveOrder", async (req, res) => {
     }
 });
 
+
+app.get("/orders/available", async (req, res) => {
+    try {
+      // Retrieve orders from the MongoDB collection where riderId is null
+      collection = database.collection("orders");
+      const orders = await collection.find({ riderId: null }).toArray();
+  
+      // Send the orders as a response
+      res.json(orders);
+    //   console.log(orders);
+    } catch (error) {
+      console.error("Error retrieving orders:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+
+
+  app.post("/updateOrderStatus", async (req, res) => {
+    try {
+        const { orderId, riderId } = req.body;
+        collection = database.collection("orders");
+        console.log(orderId,riderId);
+        // Update the order status and rider ID in the database
+        const updatedOrder = await collection.findOneAndUpdate(
+            { orderId: orderId },
+            { $set: { riderId: riderId, orderStatus: "InProgress" } },
+            { returnOriginal: false } // Return the updated document
+        );
+
+        // if (updatedOrder.value) {
+        //     res.status(200).json({ message: "Order status updated successfully", order: updatedOrder.value });
+        // } else {
+        //     res.status(404).json({ message: "Order not found" });
+        // }
+    } catch (error) {
+        console.error("Error updating order status:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
