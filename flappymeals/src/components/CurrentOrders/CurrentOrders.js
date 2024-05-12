@@ -70,33 +70,45 @@ const CurrentOrders = () => {
         const remainingSeconds = seconds % 60;
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
-
+    if(orders.length === 0){
+      return  <Container maxWidth="md" sx={{ marginTop: 4 }}>
+      {/* {console.log(orders)} */}
+            <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
+          <Typography>No Current Orders Yet ..... </Typography>
+</Container>
+      
+    }else {
     return (
      <Container maxWidth="md" sx={{ marginTop: 4 }}>
-
+      {/* {console.log(orders)} */}
             <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
-            <Grid container spacing={2}> 
+            <Grid container spacing={2}>
   {orders.map(order => (
     <Grid item xs={12} key={order.id}>
       <Card sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: "20px", backgroundColor: "#F9F9F9" }}>
-     <CardMedia component="img" image={order.items[0].ImageUrl} alt={order.items[0].itemName} style={{width:150, paddingLeft:"10px" , borderRadius: "50%" }} />
+        {order.items && order.items.length > 0 && ( // Check if order.items exists and is not empty
+          <CardMedia component="img" image={order.items[0].ImageUrl} alt={order.items[0].itemName} style={{ width: 150, paddingLeft: "10px", borderRadius: "50%" }} />
+        )}
         <CardContent>
-          {order.items.map((item, index) => (
-            <Typography key={index} variant="h6" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>{item.itemName}|</Typography>
-          ))}
+          {order.items && order.items.length > 0 && ( // Check if order.items exists and is not empty
+            order.items.map((item, index) => (
+              <Typography key={index} variant="h6" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>{item.itemName}|</Typography>
+            ))
+          )}
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Price: Rs{order.totalPrice}/-</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Pickup: {order.pickupLocation}</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Destination: {order.destinationLocation}</Typography>
-          <Button onClick={() => acceptOrder(order.orderId,"21L7732")} variant="contained" sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>Accept</Button>
-          <Button sx={{ pl:2,pr:2,color:"white",fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>View Details</Button>
+          <Button onClick={() => acceptOrder(order.orderId, "21L7732")} variant="contained" sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>Accept</Button>
+          <Button sx={{ pl: 2, pr: 2, color: "white", fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>View Details</Button>
         </CardContent>
       </Card>
     </Grid>
   ))}
 </Grid>
 
+
         </Container>
-    );
+    );}
 };
 
 export default CurrentOrders;
