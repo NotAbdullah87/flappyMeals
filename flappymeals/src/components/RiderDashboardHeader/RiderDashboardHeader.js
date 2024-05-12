@@ -16,6 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CompletedOrders from '../CompletedOrders/CompletedOrders';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const settings = ['Profile', 'Logout'];
 
@@ -24,6 +25,23 @@ const RiderDashboardHeader = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [notifications, setNotifications] = React.useState([]);
     const navigate = useNavigate();
+
+
+    const rider = JSON.parse(localStorage.getItem("rider"));
+      if(!rider){
+        console.log("rider Not Found");
+    };
+
+   
+    useEffect(() => {
+
+      const user = JSON.parse(localStorage.getItem("rider"));
+      if(!user){
+        console.log("Rider Not Found");
+        navigate('/login')
+      }
+
+    },[]);
 
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Typography, Grid, Button, Box, Card } from '@mui/material';
 import RiderDashboardHeader from '../RiderDashboardHeader/RiderDashboardHeader';
 import CurrentOrders from '../CurrentOrders/CurrentOrders';
@@ -15,18 +15,36 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RiderDashboard = () => {
- 
+    let navigate = useNavigate(); 
+    const [totalEarnings, setTotalEarnings] = useState(0);
+    const [pendingOrders, setPendingOrders] = useState(0);
+    const [completedOrders, setCompletedOrders] = useState(0);
+    const [ratings, setRatings] = useState(0);
     const rider = JSON.parse(localStorage.getItem("rider"));
       if(!rider){
         console.log("rider Not Found");
     };
-    const totalEarnings = rider.earning;
-    const pendingOrders = rider.pending_orders;
-    const completedOrders = rider.completed_orders;
-    const ratings = rider.rating;
+
+   
+    useEffect(() => {
+
+      const user = JSON.parse(localStorage.getItem("rider"));
+      if(!user){
+        console.log("Rider Not Found");
+        navigate('/login/Riderlogin')
+      }else{
+        setTotalEarnings(user.earning);
+        setPendingOrders(user.pending_orders);
+        setCompletedOrders(user.completed_orders);
+        setRatings(user.rating);
+         console.log(ratings)
+      }
+
+    },[]);
 
 
 
+    if(rider)
     return (
         <div>
             <RiderDashboardHeader />
