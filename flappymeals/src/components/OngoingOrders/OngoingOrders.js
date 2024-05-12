@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import axios from 'axios';
 
 const OngoingOrders = () => {
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState([]);  
 
     useEffect(() => {
-        const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
-        setOrders(ongoingOrders);
+        const fetchOnogingOrders = async (riderId) => {
+            try {
+              const rider = JSON.parse(localStorage.getItem("rider"));
+              riderId=rider.rider_id
+              console.log(riderId);
+                const response = await axios.post('http://localhost:5038/ongoingOrders', { riderId });
+        
+                const OngoingOrders = response.data;
+                setOrders(response.data);
+                
+                console.log("Ongoing Orders:", OngoingOrders);
+                
+                return OngoingOrders;
+            } catch (error) {
+                console.error("Error retrieving Ongoing Orders:", error);
+                return [];
+            }
+        };
+  
+        fetchOnogingOrders();
+
     }, []);
 
 
@@ -45,6 +65,7 @@ const OngoingOrders = () => {
     };
 
     return (
+        orders && <div>
         <Container maxWidth="md" sx={{ marginTop: 4 }}>
             <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Ongoing Orders</Typography>
             <Grid container spacing={2}>
@@ -75,6 +96,7 @@ const OngoingOrders = () => {
                 ))}
             </Grid>
         </Container>
+        </div>
     );
 };
 

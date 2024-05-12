@@ -75,7 +75,7 @@ const CurrentOrders = () => {
      <Container maxWidth="md" sx={{ marginTop: 4 }}>
 
             <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={2}> 
   {orders.map(order => (
     <Grid item xs={12} key={order.id}>
       <Card sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: "20px", backgroundColor: "#F9F9F9" }}>

@@ -10,12 +10,22 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StarIcon from '@mui/icons-material/Star';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RiderDashboard = () => {
-    const totalEarnings = 1500;
-    const pendingOrders = 2;
-    const completedOrders = 12;
-    const ratings = 4.5;
+ 
+    const rider = JSON.parse(localStorage.getItem("rider"));
+      if(!rider){
+        console.log("rider Not Found");
+    };
+    const totalEarnings = rider.earning;
+    const pendingOrders = rider.pending_orders;
+    const completedOrders = rider.completed_orders;
+    const ratings = rider.rating;
+
+
 
     return (
         <div>

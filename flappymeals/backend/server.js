@@ -129,12 +129,62 @@ app.post("/saveOrder", async (req, res) => {
     }
 });
 
+// Define a route for rider login
+app.post("/RiderLogin", async (req, res) => {  
+    try {
+        collection = database.collection("rider");
+
+        const details = await collection.find({}).toArray();
+        console.log(details);
+
+        const { username, password } = req.body;
+        console.log(username,password);
+        // Check if username and password match
+        const rider = await collection.findOne({ username, password });
+
+        // If rider is found, send success response
+        if (rider) {
+            res.status(200).json({ message: "Login successful", rider });
+        } else {
+            // If rider is not found, send failure response
+            res.status(401).json({ message: "Invalid username or password" });
+        }
+    } catch (error) {
+        console.error("Error during rider login:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+// Define a route to fetch ongoing orders for the current rider
+app.post("/ongoingOrders", async (req, res) => {
+    try {
+        collection = database.collection("orders");
+        const { riderId } = req.body;
+
+        // Retrieve orders from the MongoDB collection
+        const orders = await collection.find({
+            riderId: riderId,
+            orderStatus: { $in: ["InProgress", "Pending"] }
+        }).toArray();
+
+        // Send the matching orders as a response
+        res.json(orders);
+    } catch (error) {
+        console.error("Error retrieving orders:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
+
 
 app.get("/orders/available", async (req, res) => {
     try {
       // Retrieve orders from the MongoDB collection where riderId is null
       collection = database.collection("orders");
-      const orders = await collection.find({ riderId: null }).toArray();
+      const orders = await collection.find({ riderId: null}).toArray();
   
       // Send the orders as a response
       res.json(orders);
@@ -144,6 +194,11 @@ app.get("/orders/available", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+
+
+
+
 
 
 
