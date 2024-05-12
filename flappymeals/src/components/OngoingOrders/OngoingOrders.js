@@ -5,6 +5,17 @@ import axios from 'axios';
 const OngoingOrders = () => {
     const [orders, setOrders] = useState([]);  
 
+    const updateOrderStatus = async (orderId, riderId,orderStatus) => {
+      try {
+          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus});
+          console.log('Order status updated successfully:', response.data);
+          return response.data; // Return the response data if needed
+      } catch (error) {
+          console.error('Error updating order status:', error.response.data);
+          throw error.response.data; // Throw an error if the request fails
+      }
+  };
+
     useEffect(() => {
         const fetchOnogingOrders = async (riderId) => {
             try {
@@ -38,21 +49,11 @@ const OngoingOrders = () => {
     }, []);
 
 
-    const updateOrderStatus = (orderId, newStatus) => {
-        setOrders(prevOrders =>
-            prevOrders.map(order =>
-                order.id === orderId ? { ...order, status: newStatus } : order
-            )
-        );
-        // Update local storage
-        const updatedOrders = orders.map(order =>
-            order.id === orderId ? { ...order, status: newStatus } : order
-        );
-        localStorage.setItem('ongoingOrders', JSON.stringify(updatedOrders));
-    };
-
     const handlePickup = (orderId) => {
-        updateOrderStatus(orderId, 'Picked Up');
+        const rider = JSON.parse(localStorage.getItem("rider"));
+        // console.log(orderId);
+        // console.log(rider.rider_id);
+        updateOrderStatus(orderId,rider.rider_id,'PickedUp');
     };
 
     // const handleDelivered = (orderId) => {
@@ -62,14 +63,8 @@ const OngoingOrders = () => {
     // };
 
     const handleDelivered = (orderId) => {
-        setOrders(prevOrders =>
-            prevOrders.map(order =>
-                order.id === orderId ? { ...order, status: 'Pending Approval' } : order
-            )
-        );
-        localStorage.setItem('ongoingOrders', JSON.stringify(orders.map(order =>
-            order.id === orderId ? { ...order, status: 'Pending Approval' } : order
-        )));
+      const rider = JSON.parse(localStorage.getItem("rider"));
+      updateOrderStatus(orderId,rider.rider_id,'PendingApproval');
     };
     if(orders.length === 0){
         return   <Container maxWidth="md" sx={{ marginTop: 4 }}>
@@ -129,8 +124,21 @@ const OngoingOrders = () => {
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Price: Rs{order.totalPrice}/-</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Pickup: {order.pickupLocation}</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Destination: {order.destinationLocation}</Typography>
+          <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Status: {order.orderStatus}</Typography>
           {/* <Button onClick={() => acceptOrder(order.orderId, "21L7732")} variant="contained" sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>Accept</Button> */}
           {/* <Button sx={{ pl: 2, pr: 2, color: "white", fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>View Details</Button> */}
+          
+          {order.orderStatus === 'InProgress' && (
+            <Button variant="contained" onClick={() => handlePickup(order.orderId)} sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>
+              Pick Up
+            </Button>
+          )}
+          {order.orderStatus === 'PickedUp' && (
+            <Button variant="contained" onClick={() => handleDelivered(order.orderId)} sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>
+              Deliver
+            </Button>
+          )}
+
         </CardContent>
       </Card>
     </Grid>

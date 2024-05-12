@@ -51,8 +51,10 @@ app.post("/CurrentOrderForUser", async (req, res) => {
         // Retrieve orders from the MongoDB collection
         const orders = await collection.find({
             customerId: customerId,
-            orderStatus: { $in: ["InProgress", "Pending"] }
+            orderStatus: { $in: ["Pending","InProgress","PickedUp","PendingApproval"] }
         }).toArray();
+
+        console.log(orders);
 
         // Send the matching orders as a response
         res.json(orders);
@@ -129,7 +131,7 @@ app.post("/saveOrder", async (req, res) => {
     }
 });
 
-// Define a route for rider login
+// Define a route for rider login 
 app.post("/RiderLogin", async (req, res) => {  
     try {
         collection = database.collection("rider");
@@ -165,7 +167,7 @@ app.post("/ongoingOrders", async (req, res) => {
         // Retrieve orders from the MongoDB collection
         const orders = await collection.find({
             riderId: riderId,
-            orderStatus: { $in: ["InProgress", "Pending"] }
+            orderStatus: { $in: ["InProgress","PickedUp","PendingApproval"] }
         }).toArray();
 
         // Send the matching orders as a response
@@ -175,10 +177,6 @@ app.post("/ongoingOrders", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-
-
-
-
 
 app.get("/orders/available", async (req, res) => {
     try {
@@ -196,23 +194,22 @@ app.get("/orders/available", async (req, res) => {
   });
 
 
-
-
-
-
-
-
   app.post("/updateOrderStatus", async (req, res) => {
     try {
-        const { orderId, riderId } = req.body;
+        const { orderId, riderId, orderStatus } = req.body;
         collection = database.collection("orders");
-        console.log(orderId,riderId);
+           console.log(orderId);
+           console.log(riderId);
+           console.log(orderStatus);
+
         // Update the order status and rider ID in the database
         const updatedOrder = await collection.findOneAndUpdate(
             { orderId: orderId },
-            { $set: { riderId: riderId, orderStatus: "InProgress" } },
+            { $set: { riderId: riderId, orderStatus: orderStatus } },
             { returnOriginal: false } // Return the updated document
         );
+
+        console.log('Order status updated successfully');
 
         // if (updatedOrder.value) {
         //     res.status(200).json({ message: "Order status updated successfully", order: updatedOrder.value });
@@ -229,3 +226,22 @@ app.get("/orders/available", async (req, res) => {
         console.error("Error connecting to MongoDB:", error);
     }
 });
+
+
+app.get("/completedOrders", async (req, res) => {
+    try {
+        const { riderId } = req.query; // Use req.query to access query parameters
+        // Retrieve orders from the MongoDB collection
+        const collection = database.collection("orders");
+        const orders = await collection.find({
+            riderId: riderId,
+            orderStatus: "Completed"
+        }).toArray();
+        // Send the orders as a response
+        res.json(orders);
+    } catch (error) {
+        console.error("Error retrieving orders:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+

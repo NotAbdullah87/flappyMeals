@@ -76,9 +76,40 @@ import { useNavigate } from 'react-router-dom';
       };
 
       getCurrentOrders();
+
+      // Set interval to fetch orders every 3 seconds
+      const intervalId = setInterval(getCurrentOrders, 3000);
+
+      // Clean up function to clear the interval when component unmounts
+      return () => clearInterval(intervalId);
+
     }, []);
 
     console.log(foodItems);
+
+    const updateOrderStatus = async (orderId, riderId) => {
+      try {
+          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus: 'Completed' });
+          console.log('Order status updated successfully:', response.data);
+      } catch (error) {
+          console.error('Error updating order status:', error);
+      }
+  };
+  
+  const orderStatusOrder = {
+    'PendingApproval': 0,
+    'PickedUp': 1,
+    'InProccess': 2,
+    'Pending': 3
+};
+
+const sortedOrders = orders.sort((a, b) => {
+    const statusA = orderStatusOrder[a.orderStatus];
+    const statusB = orderStatusOrder[b.orderStatus];
+    return statusA - statusB;
+});
+
+
 
   return (
     foodItems && <div>
@@ -172,23 +203,33 @@ import { useNavigate } from 'react-router-dom';
       <Typography variant="h5" gutterBottom style={{fontFamily:"Josefin Sans",fontWeight:900}}>
         Current Orders
       </Typography>
-      {orders.length > 0 ? (
-        <div>
-          {/* Render current orders */}
-          {orders.map((order, index) => (
-            <div key={index} style={{backgroundColor:"#FD6C6C",color:"black",fontFamily:"Josefin Sans",padding:"10px",width:"50vw",fontWeight:900,borderRadius:"25px",marginBottom :"10px"}}>
-              {/* Display order details */}
-              <Typography variant="body1" sx={{fontFamily:"Josefin Sans",fontWeight:900,color:'white'}}>
-                Order #{index + 1}: {order.orderId} - PKR{order.totalPrice} | {order.orderStatus} |
-              </Typography>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <Typography variant="body1">
-          You don't have any current orders.
-        </Typography>
-      )}
+      {sortedOrders.length > 0 ? (
+                            <Grid container spacing={2}>
+                                {sortedOrders.map((order, index) => (
+                                    <Grid item xs={12} key={index}>
+                                        <Button
+                                            variant="contained"
+                                            onClick={() => updateOrderStatus(order.orderId, order.riderId)}
+                                            disabled={order.orderStatus !== 'PendingApproval'}
+                                            sx={{
+                                                fontWeight: 'bold',
+                                                fontFamily: 'Josefin Sans',
+                                                borderRadius: '20px',
+                                                backgroundColor: order.orderStatus === 'PendingApproval' ? '#D91919' : '#FEE7E7',
+                                                color: order.orderStatus === 'PendingApproval' ? 'white' : '#D91919',
+                                                '&:hover': {
+                                                    backgroundColor: order.orderStatus === 'PendingApproval' ? '#A70D0D' : '#FEE7E7',
+                                                },
+                                            }}
+                                        >
+                                            Order #{index + 1}: {order.orderId} - PKR{order.totalPrice} | {order.orderStatus}
+                                        </Button>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        ) : (
+                            <Typography variant="body1">You don't have any current orders.</Typography>
+                        )}
     </Paper>
     </Container>
 

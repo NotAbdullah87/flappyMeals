@@ -7,9 +7,9 @@ const CurrentOrders = () => {
     const [orders, setOrders] = useState([]);
     const [foodItems, setFoodItems] = useState([]);
 
-    const updateOrderStatus = async (orderId, riderId) => {
+    const updateOrderStatus = async (orderId, riderId,orderStatus) => {
       try {
-          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId });
+          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus});
           console.log('Order status updated successfully:', response.data);
           return response.data; // Return the response data if needed
       } catch (error) {
@@ -47,15 +47,20 @@ const CurrentOrders = () => {
     }, []);
 
 
-    const acceptOrder = (orderId,rideId) => {
+    const acceptOrder = (orderId) => {
         // const acceptedOrder = orders.find(order => order.id === orderId);
         // const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
         // ongoingOrders.push(acceptedOrder);
         // localStorage.setItem('ongoingOrders', JSON.stringify(ongoingOrders));
         // setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
         // removeOrder(orderId);
+        const rider = JSON.parse(localStorage.getItem("rider"));
+        if(!rider){
+          console.log("rider Not Found");
+      };
+
         console.log(orderId); 
-        updateOrderStatus(orderId,rideId); 
+        updateOrderStatus(orderId,rider.rider_id,"InProgress"); 
       };
     
     // remove an order after the timer reaches zero
@@ -98,7 +103,7 @@ const CurrentOrders = () => {
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Price: Rs{order.totalPrice}/-</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Pickup: {order.pickupLocation}</Typography>
           <Typography variant="body1" sx={{ fontFamily: "Josefin Sans", fontWeight: 900 }}>Destination: {order.destinationLocation}</Typography>
-          <Button onClick={() => acceptOrder(order.orderId, "21L7732")} variant="contained" sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>Accept</Button>
+          <Button onClick={() => acceptOrder(order.orderId)} variant="contained" sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>Accept</Button>
           <Button sx={{ pl: 2, pr: 2, color: "white", fontWeight: 'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>View Details</Button>
         </CardContent>
       </Card>

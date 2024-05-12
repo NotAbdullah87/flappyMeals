@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +15,7 @@ import { Link } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CompletedOrders from '../CompletedOrders/CompletedOrders';
+import { useNavigate } from 'react-router-dom';
 
 const settings = ['Profile', 'Logout'];
 
@@ -21,6 +23,7 @@ const RiderDashboardHeader = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [notifications, setNotifications] = React.useState([]);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -33,6 +36,12 @@ const RiderDashboardHeader = () => {
     const handleCloseNavMenu = () => {
       setAnchorElNav(null);
     };
+
+    const handleLogout = () => {
+      // Clear rider information from local storage
+      localStorage.removeItem('rider');
+      navigate('/');
+  };
   
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
@@ -62,7 +71,7 @@ const RiderDashboardHeader = () => {
             }}
             style={{ fontFamily: "Jomhuria", fontSize: "50px" }}
           >
-            <Link style={{ textDecoration: "none", color: "#D91919" }} to={'/'}>
+            <Link style={{ textDecoration: "none", color: "#D91919" }} onClick={handleLogout}>
               Flappy Meals
             </Link>
           </Typography>
@@ -205,16 +214,16 @@ const RiderDashboardHeader = () => {
           color
         >
           {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
-          ))}
+              <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
         </Menu>
       </Box>
     </Toolbar>
   </Container>
 </AppBar>
-  )
+)
 }
 
 export default RiderDashboardHeader
