@@ -15,6 +15,8 @@ import {
 } from "react-router-dom";
 import CompletedOrders from './components/CompletedOrders/CompletedOrders';
 import CustomerSignup from './components/signUp/customerSignup';
+import RiderSignup from './components/signUp/riderSignup';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
   {
     path : '/signup/customer',
     element : <CustomerSignup />
+  },
+  {
+    path : '/signup/rider',
+    element : <RiderSignup />
   }
 ]);
 

@@ -266,6 +266,32 @@ app.post('/Customersignup', async (req, res) => {
     res.status(201).json({ message: 'Customer created successfully' });
   });
   
+  app.post('/Ridersignup', async (req, res) => {
+    const { username, password } = req.body;
+    const collection = database.collection("rider");
+    // Check if username already exists
+    const existingRider = await collection.findOne({ username });
+    if (existingRider) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+  
+     // Create a new order document
+     const newRider = {
+      username,
+      password,
+      earning : 0 , 
+      pending_orders : 0 ,
+      completed_orders : 0 , 
+      rating : 0 
+    };
+    // Create new customer
+    const result = await collection.insertOne(newRider);
+    // const newCustomer = new Customer({ username, password });
+    // await newCustomer.save();
+    
+    res.status(201).json({ message: 'Customer created successfully' });
+  });
+  
 
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
