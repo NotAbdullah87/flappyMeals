@@ -109,7 +109,7 @@ const sortedOrders = orders.sort((a, b) => {
     return statusA - statusB;
 });
 
-
+  
 
   return (
     foodItems && <div>

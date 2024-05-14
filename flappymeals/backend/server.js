@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json()); // apply body-parser middleware
 
 
-const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.net/?retryWrites=true&w=majority&appName=flappyMeals";
+const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=flappyMeals";
 
 const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -278,6 +278,7 @@ app.post('/Customersignup', async (req, res) => {
      // Create a new order document
      const newRider = {
       username,
+      rider_id:username,
       password,
       earning : 0 , 
       pending_orders : 0 ,
