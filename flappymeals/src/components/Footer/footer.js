@@ -7,7 +7,6 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
 import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
@@ -68,7 +67,7 @@ export default function Footer() {
                   'aria-label': 'Enter your email address',
                 }}
               />
-              <Button variant="contained" sx={{ flexShrink: 0 , color: 'white' , fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px',  backgroundColor:'#D91919' , borderRadius:20, '&:hover': { backgroundColor: '#A70D0D' }}}>
+              <Button variant="contained" sx={{ flexShrink: 0 , color: 'white' , fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px',  backgroundColor:'#D91919' ,  '&:hover': { backgroundColor: '#A70D0D' }}}>
                 Subscribe
               </Button>
             </Stack>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container,Typography,TextField,Grid,Button,Paper, SvgIcon } from '@mui/material';
+import React, {  useState } from 'react';
+import {Typography,TextField,Grid,Button ,Paper} from '@mui/material';
 import { useLocation } from 'react-router';
 import UserDashboardHeader from '../userDashboardHeader/userDashboardHeader';
 import Footer from '../Footer/footer';
@@ -7,7 +7,7 @@ import Footer from '../Footer/footer';
 
 
 
-const ProductDetailPage = ({}) => {
+const ProductDetailPage = () => {
 
 
   const [quantity, setQuantity] = useState(1);
@@ -15,7 +15,7 @@ const ProductDetailPage = ({}) => {
   const location = useLocation();
   const { state } = location;
   const price = state.price
-  const id = state.id ;
+  // const id = state.id ;
   const name = state.name ; 
   
   // Ensure state is not null and price is accessible
@@ -82,6 +82,7 @@ const addToCart = (item,q) => {
               }}
               value={quantity}
               onChange={handleQuantityChange}
+              
             />
             <br></br>
             <Button onClick={() => addToCart(state,quantity)} variant="contained" sx={{mt:2 ,fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>

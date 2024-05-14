@@ -7,6 +7,9 @@ import Image from './Vector.png';
 import MobileImage from './mobile.png';
 import 'animate.css' 
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+
+
 function Hero() {
 
   useEffect(() => {
@@ -14,6 +17,14 @@ function Hero() {
     localStorage.clear();
   }, []);
 
+  const navigate = useNavigate()
+  function orderButton(){
+      navigate('/login')
+  }
+  
+  function RiderButton(){
+    navigate('/login/RiderLogin')
+}
 
 
   return (
@@ -44,17 +55,19 @@ function Hero() {
           <Typography variant="h6" color="black" fontWeight="medium" gutterBottom style={{ fontFamily: 'Josefin Sans', fontSize: { xs: '1rem', md: '1.2rem' } }} sx={{ mb: 2 }}>
             System Drinks, Food & much more.
           </Typography>
-          <Button variant="contained" sx={{ fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>
+         
+          <Button onClick={orderButton} variant="contained" sx={{ fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', mr: 2, mb: { xs: 2, md: 0 }, backgroundColor: '#D91919', '&:hover': { backgroundColor: '#A70D0D' } }}>
             Order now
           </Button>
-          <Button variant="outlined" sx={{ fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', borderColor: '#D91919', color: '#D91919', '&:hover': { backgroundColor: '#D91919', color: 'white' } }}>
+      
+          <Button onClick={RiderButton} variant="outlined" sx={{ fontWeight:'bold', fontFamily: 'Josefin Sans', borderRadius: '20px', borderColor: '#D91919', color: '#D91919', '&:hover': { backgroundColor: '#D91919', color: 'white' } }}>
             Work with us
           </Button>
           </Container>
         </Box>
         <Box  sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, position: 'relative', textAlign: { xs: 'center', md: 'right' } }}>
           <img className='animate__animated animate__fadeInUp' src={Image} alt="Delivery" style={{ width: '100%', height: 'auto' }} />
-          <img src={MobileImage} alt="Mobile" style={{ position: 'absolute', top: '94%', left: '-90%', width: 'auto', height: '400px', zIndex: 1 }} />
+          <img src={MobileImage} alt="Mobile" style={{ position: 'absolute', top :'94%', left: '-90%', width: 'auto', height: '400px', zIndex: 1 }} />
         </Box>
       </Container>
  

@@ -14,6 +14,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CompletedOrders from './components/CompletedOrders/CompletedOrders';
+import CustomerSignup from './components/signUp/customerSignup';
+import RiderSignup from './components/signUp/riderSignup';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
   {
     path : "/login/RiderLogin",
     element : <RiderLogin />
+  },
+  {
+    path : '/signup/customer',
+    element : <CustomerSignup />
+  },
+  {
+    path : '/signup/rider',
+    element : <RiderSignup />
   }
 ]);
 

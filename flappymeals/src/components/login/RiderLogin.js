@@ -45,6 +45,11 @@ const RiderLogin = () => {
   return (
     <div>
         <Header/>
+        <Container sx={{textAlign:"center"}}>
+        <Typography sx={{fontFamily:"Josefin Sans",fontWeight:600,color:"#D91919"}}>Testing Accounts :</Typography>
+        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>username : 21L1790</Typography>
+        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>password : 123</Typography>
+        </Container>
     <Container className='animate__animated animate__slideInLeft' component="main" maxWidth="xs" sx={{marginBottom:{s:'10vh'}}} style={{ marginTop:"12vh",marginBottom:"10vh", display: 'flex', justifyContent: 'center' }}>
       <Paper elevation={3} style={{ padding: '20px' }}>
         <Typography variant="h5" component="h2" gutterBottom  style={{ fontFamily: 'Josefin Sans', color:"#D91919" , fontWeight:900 , fontSize: { xs: '1rem', md: '1.2rem' } }}>
@@ -112,6 +117,23 @@ const RiderLogin = () => {
     </Button>    
       </Paper>
     </Container>
+
+
+    <Container sx={{textAlign:"center"}}>
+    
+    <Typography variant='h4' sx={{fontFamily:"Josefin Sans",fontWeight:"600",fontSize:"1rem",color:"#D91919"}}
+    >Don't have an account ? </Typography>
+<Button
+        type="submit"
+        // fullWidth
+        variant="contained"
+       
+        style={{ margin: '20px 0 16px',backgroundColor:"#D91919" , '&:hover':{backgroundColor :"black"} }}
+      >
+        <Link to='/signup/rider' style={{textDecoration:"none",color:"white",fontFamily:"Josefin Sans"}}>Create a New Account</Link>
+      </Button>
+     
+      </Container>
     {loginStatus === 'success' && ( // Conditionally render Alert for successful login
             <Alert sx={{width:"80%"}} severity="success">Login successful.</Alert>
           )}
