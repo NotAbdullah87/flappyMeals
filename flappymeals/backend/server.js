@@ -243,6 +243,30 @@ app.get("/completedOrders", async (req, res) => {
     }
 });
 
+
+app.post('/Customersignup', async (req, res) => {
+    const { username, password } = req.body;
+    const collection = database.collection("customer");
+    // Check if username already exists
+    const existingCustomer = await collection.findOne({ username });
+    if (existingCustomer) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+  
+     // Create a new order document
+     const newCustomer = {
+      username,
+      password
+    };
+    // Create new customer
+    const result = await collection.insertOne(newCustomer);
+    // const newCustomer = new Customer({ username, password });
+    // await newCustomer.save();
+    
+    res.status(201).json({ message: 'Customer created successfully' });
+  });
+  
+
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
     }

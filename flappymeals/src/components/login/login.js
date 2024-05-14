@@ -111,9 +111,31 @@ const Login = () => {
       }}
     >
       Rider Login
-    </Button>    
+    </Button>  
+
+    
       </Paper>
+
+
     </Container>
+
+      
+      <Container sx={{textAlign:"center"}}>
+    
+        <Typography variant='h4' sx={{fontFamily:"Josefin Sans",fontWeight:"600",fontSize:"1rem",color:"#D91919"}}
+        >Don't have an account ? </Typography>
+    <Button
+            type="submit"
+            // fullWidth
+            variant="contained"
+           
+            style={{ margin: '20px 0 16px',backgroundColor:"#D91919" , '&:hover':{backgroundColor :"black"} }}
+          >
+            <Link to='/signup/customer' style={{textDecoration:"none",color:"white",fontFamily:"Josefin Sans"}}>Create a New Account</Link>
+          </Button>
+         
+          </Container>
+
     {loginStatus === 'success' && ( // Conditionally render Alert for successful login
             <Alert sx={{width:"80%"}} severity="success">Login successful.</Alert>
           )}

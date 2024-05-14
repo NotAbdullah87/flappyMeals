@@ -14,7 +14,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CompletedOrders from './components/CompletedOrders/CompletedOrders';
-
+import CustomerSignup from './components/signUp/customerSignup';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +50,10 @@ const router = createBrowserRouter([
   {
     path : "/login/RiderLogin",
     element : <RiderLogin />
+  },
+  {
+    path : '/signup/customer',
+    element : <CustomerSignup />
   }
 ]);
 
