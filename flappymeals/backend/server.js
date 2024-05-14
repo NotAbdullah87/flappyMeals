@@ -278,6 +278,7 @@ app.post('/Customersignup', async (req, res) => {
      // Create a new order document
      const newRider = {
       username,
+      rider_id:username,
       password,
       earning : 0 , 
       pending_orders : 0 ,
