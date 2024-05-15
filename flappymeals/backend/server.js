@@ -24,7 +24,7 @@ res.status(200).json('Welcome, your app is working well');
 
 app.listen(PORT, () => {
 console.log(`Server running at http://localhost:${PORT}`);
-  await client.connect();
+  // await client.connect();
 console.log("Connected to MongoDB");
 });
 
