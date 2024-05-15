@@ -83,7 +83,7 @@ let collection = database.collection("items");
 const { orderId, orderDate, orderTime, customerId, customerContact, items, totalPrice, pickupLocation, destinationLocation, specialInstructions } = req.body;
 
 // Access the "orders" collection in the database
-const database = client.db("flappyMeals");
+// const database = client.db("flappyMeals");
 const ordersCollection = database.collection("orders");
 
 // Create a new order document
@@ -117,135 +117,135 @@ res.status(500).json({ error: "Internal server error" });
 }
 });
 
-// // Define a route for user login
-// app.post("/login", async (req, res) => {
-// try {
+// Define a route for user login
+app.post("/login", async (req, res) => {
+try {
 
-//   await client.connect();
-// console.log("Connected to MongoDB");
+  // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
  
-// collection = database.collection("customer");
-// // console.log(req.body);
-// const items = await collection.find({}).toArray();
-// console.log(items);
-// // Extract username and password from request body
-// const { username, password } = req.body;
-// console.log(username,password);
-// // Check if username and password match
-// const user = await collection.findOne({ username, password });
+collection = database.collection("customer");
+// console.log(req.body);
+const items = await collection.find({}).toArray();
+console.log(items);
+// Extract username and password from request body
+const { username, password } = req.body;
+console.log(username,password);
+// Check if username and password match
+const user = await collection.findOne({ username, password });
 
-// // If user is found, send success response
-// if (user) {
-// res.status(200).json({ message: "Login successful", user });
-// } else {
-// // If user is not found, send failure response
-// res.status(401).json({ message: "Invalid username or password" });
-// }
-// } catch (error) {
-// console.error("Error during login:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
-
-
-// app.post('/Ridersignup', async (req, res) => {
+// If user is found, send success response
+if (user) {
+res.status(200).json({ message: "Login successful", user });
+} else {
+// If user is not found, send failure response
+res.status(401).json({ message: "Invalid username or password" });
+}
+} catch (error) {
+console.error("Error during login:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
-//  await client.connect();
-// console.log("Connected to MongoDB");
-
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-
-// const { username, password } = req.body;
-// const collection = database.collection("rider");
-// // Check if username already exists
-// const existingRider = await collection.findOne({ username });
-// if (existingRider) {
-// return res.status(400).json({ message: 'Username already exists' });
-// }
-
-// // Create a new order document
-// const newRider = {
-// username,
-// rider_id:username,
-// password,
-// earning : 0 ,
-// pending_orders : 0 ,
-// completed_orders : 0 ,
-// rating : 0
-// };
-// // Create new customer
-// const result = await collection.insertOne(newRider);
-// // const newCustomer = new Customer({ username, password });
-// // await newCustomer.save();
-
-// res.status(201).json({ message: 'Customer created successfully' });
-// });
+app.post('/Ridersignup', async (req, res) => {
 
 
-// app.post('/Customersignup', async (req, res) => {
-//  await client.connect();
-// console.log("Connected to MongoDB");
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-// const { username, password } = req.body;
-// const collection = database.collection("customer");
-// // Check if username already exists
-// const existingCustomer = await collection.findOne({ username });
-// if (existingCustomer) {
-// return res.status(400).json({ message: 'Username already exists' });
-// }
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
 
-// // Create a new order document
-// const newCustomer = {
-// username,
-// password
-// };
-// // Create new customer
-// const result = await collection.insertOne(newCustomer);
-// // const newCustomer = new Customer({ username, password });
-// // await newCustomer.save();
+const { username, password } = req.body;
+const collection = database.collection("rider");
+// Check if username already exists
+const existingRider = await collection.findOne({ username });
+if (existingRider) {
+return res.status(400).json({ message: 'Username already exists' });
+}
 
-// res.status(201).json({ message: 'Customer created successfully' });
-// });
+// Create a new order document
+const newRider = {
+username,
+rider_id:username,
+password,
+earning : 0 ,
+pending_orders : 0 ,
+completed_orders : 0 ,
+rating : 0
+};
+// Create new customer
+const result = await collection.insertOne(newRider);
+// const newCustomer = new Customer({ username, password });
+// await newCustomer.save();
+
+res.status(201).json({ message: 'Customer created successfully' });
+});
 
 
-// // Define a route for rider login
-// app.post("/RiderLogin", async (req, res) => {
-// try {
+app.post('/Customersignup', async (req, res) => {
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-//  await client.connect();
-// console.log("Connected to MongoDB");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
+const { username, password } = req.body;
+const collection = database.collection("customer");
+// Check if username already exists
+const existingCustomer = await collection.findOne({ username });
+if (existingCustomer) {
+return res.status(400).json({ message: 'Username already exists' });
+}
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-// collection = database.collection("rider");
+// Create a new order document
+const newCustomer = {
+username,
+password
+};
+// Create new customer
+const result = await collection.insertOne(newCustomer);
+// const newCustomer = new Customer({ username, password });
+// await newCustomer.save();
 
-// const details = await collection.find({}).toArray();
-// console.log(details);
+res.status(201).json({ message: 'Customer created successfully' });
+});
 
-// const { username, password } = req.body;
-// console.log(username,password);
-// // Check if username and password match
-// const rider = await collection.findOne({ username, password });
 
-// // If rider is found, send success response
-// if (rider) {
-// res.status(200).json({ message: "Login successful", rider });
-// } else {
-// // If rider is not found, send failure response
-// res.status(401).json({ message: "Invalid username or password" });
-// }
-// } catch (error) {
-// console.error("Error during rider login:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// Define a route for rider login
+app.post("/RiderLogin", async (req, res) => {
+try {
+
+ // await client.connect();
+console.log("Connected to MongoDB");
+
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
+collection = database.collection("rider");
+
+const details = await collection.find({}).toArray();
+console.log(details);
+
+const { username, password } = req.body;
+console.log(username,password);
+// Check if username and password match
+const rider = await collection.findOne({ username, password });
+
+// If rider is found, send success response
+if (rider) {
+res.status(200).json({ message: "Login successful", rider });
+} else {
+// If rider is not found, send failure response
+res.status(401).json({ message: "Invalid username or password" });
+}
+} catch (error) {
+console.error("Error during rider login:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
 // app.get("/completedOrders", async (req, res) => {
