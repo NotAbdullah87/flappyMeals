@@ -248,94 +248,94 @@ res.status(500).json({ error: "Internal server error" });
 });
 
 
-// app.get("/completedOrders", async (req, res) => {
-// try {
+app.get("/completedOrders", async (req, res) => {
+try {
 
-//  await client.connect();
-// console.log("Connected to MongoDB");
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
  
-// const { riderId } = req.query; // Use req.query to access query parameters
-// // Retrieve orders from the MongoDB collection
-// console.log(riderId)
-// const collection = database.collection("orders");
-// const orders = await collection.find({
-// riderId: riderId,
-// orderStatus: "Completed"
-// }).toArray();
-// // Send the orders as a response
-// console.log(orders)
-// res.json(orders);
-// } catch (error) {
-// console.error("Error retrieving orders:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+const { riderId } = req.query; // Use req.query to access query parameters
+// Retrieve orders from the MongoDB collection
+console.log(riderId)
+const collection = database.collection("orders");
+const orders = await collection.find({
+riderId: riderId,
+orderStatus: "Completed"
+}).toArray();
+// Send the orders as a response
+console.log(orders)
+res.json(orders);
+} catch (error) {
+console.error("Error retrieving orders:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
-// app.get("/completedOrders", async (req, res) => {
-// try {
+app.get("/completedOrders", async (req, res) => {
+try {
 
-//  await client.connect();
-// console.log("Connected to MongoDB");
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
 
  
-// const { riderId } = req.query; // Use req.query to access query parameters
-// // Retrieve orders from the MongoDB collection
-// console.log(riderId)
-// const collection = database.collection("orders");
-// const orders = await collection.find({
-// riderId: riderId,
-// orderStatus: "Completed"
-// }).toArray();
-// // Send the orders as a response
-// console.log(orders)
-// res.json(orders);
-// } catch (error) {
-// console.error("Error retrieving orders:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+const { riderId } = req.query; // Use req.query to access query parameters
+// Retrieve orders from the MongoDB collection
+console.log(riderId)
+const collection = database.collection("orders");
+const orders = await collection.find({
+riderId: riderId,
+orderStatus: "Completed"
+}).toArray();
+// Send the orders as a response
+console.log(orders)
+res.json(orders);
+} catch (error) {
+console.error("Error retrieving orders:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
-// app.post("/updateOrderStatus", async (req, res) => {
-// try {
-//  await client.connect();
-// console.log("Connected to MongoDB");
+app.post("/updateOrderStatus", async (req, res) => {
+try {
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
  
-// const { orderId, riderId, orderStatus } = req.body;
-// collection = database.collection("orders");
-// console.log(orderId);
-// console.log(riderId);
-// console.log(orderStatus);
+const { orderId, riderId, orderStatus } = req.body;
+collection = database.collection("orders");
+console.log(orderId);
+console.log(riderId);
+console.log(orderStatus);
 
-// // Update the order status and rider ID in the database
-// const updatedOrder = await collection.findOneAndUpdate(
-// { orderId: orderId },
-// { $set: { riderId: riderId, orderStatus: orderStatus } },
-// { returnOriginal: false } // Return the updated document
-// );
+// Update the order status and rider ID in the database
+const updatedOrder = await collection.findOneAndUpdate(
+{ orderId: orderId },
+{ $set: { riderId: riderId, orderStatus: orderStatus } },
+{ returnOriginal: false } // Return the updated document
+);
 
-// console.log('Order status updated successfully');
+console.log('Order status updated successfully');
 
-// // if (updatedOrder.value) {
-// // res.status(200).json({ message: "Order status updated successfully", order: updatedOrder.value });
-// // } else {
-// // res.status(404).json({ message: "Order not found" });
-// // }
-// } catch (error) {
-// console.error("Error updating order status:", error);
-// res.status(500).json({ error: "Internal server error" });
+// if (updatedOrder.value) {
+// res.status(200).json({ message: "Order status updated successfully", order: updatedOrder.value });
+// } else {
+// res.status(404).json({ message: "Order not found" });
 // }
-// });
+} catch (error) {
+console.error("Error updating order status:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 // // Define a route to fetch ongoing orders for the current rider
 // app.post("/ongoingOrders", async (req, res) => {
