@@ -15,6 +15,7 @@ const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.ne
 const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const port = 3000;
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 
 
