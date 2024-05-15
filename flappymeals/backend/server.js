@@ -16,14 +16,14 @@ const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTo
 
 const port = 3000;
 
-
+ await client.connect();
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.get("/items", async (req, res) => {
 try {
 
  
- await client.connect();
+
 console.log("Connected to MongoDB");
 
 const database = client.db("flappyMeals");
