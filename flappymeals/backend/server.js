@@ -337,50 +337,50 @@ res.status(500).json({ error: "Internal server error" });
 }
 });
 
-// // Define a route to fetch ongoing orders for the current rider
-// app.post("/ongoingOrders", async (req, res) => {
-// try {
-//  await client.connect();
-// console.log("Connected to MongoDB");
+// Define a route to fetch ongoing orders for the current rider
+app.post("/ongoingOrders", async (req, res) => {
+try {
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-// collection = database.collection("orders");
-// const { riderId } = req.body;
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
+collection = database.collection("orders");
+const { riderId } = req.body;
 
-// // Retrieve orders from the MongoDB collection
-// const orders = await collection.find({
-// riderId: riderId,
-// orderStatus: { $in: ["InProgress","PickedUp","PendingApproval"] }
-// }).toArray();
+// Retrieve orders from the MongoDB collection
+const orders = await collection.find({
+riderId: riderId,
+orderStatus: { $in: ["InProgress","PickedUp","PendingApproval"] }
+}).toArray();
 
-// // Send the matching orders as a response
-// res.json(orders);
-// } catch (error) {
-// console.error("Error retrieving orders:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// Send the matching orders as a response
+res.json(orders);
+} catch (error) {
+console.error("Error retrieving orders:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
-// app.get("/orders/available", async (req, res) => {
-// try {
-//  await client.connect();
-// console.log("Connected to MongoDB");
+app.get("/orders/available", async (req, res) => {
+try {
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-// // Retrieve orders from the MongoDB collection where riderId is null
-// collection = database.collection("orders");
-// const orders = await collection.find({ riderId: null}).toArray();
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
+// Retrieve orders from the MongoDB collection where riderId is null
+collection = database.collection("orders");
+const orders = await collection.find({ riderId: null}).toArray();
 
-// // Send the orders as a response
-// res.json(orders);
-// // console.log(orders);
-// } catch (error) {
-// console.error("Error retrieving orders:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// Send the orders as a response
+res.json(orders);
+// console.log(orders);
+} catch (error) {
+console.error("Error retrieving orders:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
 // app.listen(port, async () => {
