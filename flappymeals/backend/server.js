@@ -43,79 +43,79 @@ res.status(500).json({ error: "Internal server error" });
 }
 });
 
-// app.post("/CurrentOrderForUser", async (req, res) => {
-// try {
+app.post("/CurrentOrderForUser", async (req, res) => {
+try {
 
-//   await client.connect();
+  // await client.connect();
 // console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
  
-// collection = database.collection("orders");
-// const { customerId } = req.body;
+collection = database.collection("orders");
+const { customerId } = req.body;
 
-// // Retrieve orders from the MongoDB collection
-// const orders = await collection.find({
-// customerId: customerId,
-// orderStatus: { $in: ["Pending","InProgress","PickedUp","PendingApproval"] }
-// }).toArray();
+// Retrieve orders from the MongoDB collection
+const orders = await collection.find({
+customerId: customerId,
+orderStatus: { $in: ["Pending","InProgress","PickedUp","PendingApproval"] }
+}).toArray();
 
-// console.log(orders);
+console.log(orders);
 
-// // Send the matching orders as a response
-// res.json(orders);
-// } catch (error) {
-// console.error("Error retrieving orders:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// Send the matching orders as a response
+res.json(orders);
+} catch (error) {
+console.error("Error retrieving orders:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
-// app.post("/saveOrder", async (req, res) => {
-// try {
+app.post("/saveOrder", async (req, res) => {
+try {
 
-//  await client.connect();
-// console.log("Connected to MongoDB");
+ // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
-// // Extract order details from the request body
-// const { orderId, orderDate, orderTime, customerId, customerContact, items, totalPrice, pickupLocation, destinationLocation, specialInstructions } = req.body;
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
+// Extract order details from the request body
+const { orderId, orderDate, orderTime, customerId, customerContact, items, totalPrice, pickupLocation, destinationLocation, specialInstructions } = req.body;
 
-// // Access the "orders" collection in the database
-// const database = client.db("flappyMeals");
-// const ordersCollection = database.collection("orders");
+// Access the "orders" collection in the database
+const database = client.db("flappyMeals");
+const ordersCollection = database.collection("orders");
 
-// // Create a new order document
-// const newOrder = {
-// orderId,
-// orderDate,
-// orderTime,
-// customerId,
-// customerContact,
-// items,
-// totalPrice,
-// pickupLocation,
-// destinationLocation,
-// specialInstructions,
-// orderStatus: "Pending", // Set initial order status to "Pending"
-// riderId: null, // Set initial riderId to null
-// deliveryDate : null ,
-// deliveryTime : null ,
+// Create a new order document
+const newOrder = {
+orderId,
+orderDate,
+orderTime,
+customerId,
+customerContact,
+items,
+totalPrice,
+pickupLocation,
+destinationLocation,
+specialInstructions,
+orderStatus: "Pending", // Set initial order status to "Pending"
+riderId: null, // Set initial riderId to null
+deliveryDate : null ,
+deliveryTime : null ,
 
-// };
+};
 
-// // Insert the new order document into the "orders" collection
-// const result = await ordersCollection.insertOne(newOrder);
+// Insert the new order document into the "orders" collection
+const result = await ordersCollection.insertOne(newOrder);
 
-// // Send a success response
-// res.status(201).json({ message: "Order saved successfully", orderId: result.insertedId });
-// } catch (error) {
-// console.error("Error saving order:", error);
-// // Send an error response
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// Send a success response
+res.status(201).json({ message: "Order saved successfully", orderId: result.insertedId });
+} catch (error) {
+console.error("Error saving order:", error);
+// Send an error response
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 // // Define a route for user login
 // app.post("/login", async (req, res) => {
