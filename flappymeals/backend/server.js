@@ -300,6 +300,7 @@ res.status(201).json({ message: 'Customer created successfully' });
 
 } catch (error) {
 console.error("Error connecting to MongoDB:", error);
+  res.status(201).json({ message: 'db' });
 }
 });
 
