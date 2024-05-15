@@ -15,13 +15,16 @@ const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.ne
 const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const port = 3000;
+
+ await client.connect();
+console.log("Connected to MongoDB");
+
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.get("/items", async (req, res) => {
 try {
 
-  await client.connect();
-console.log("Connected to MongoDB");
+ 
 
 const database = client.db("flappyMeals");
 let collection = database.collection("items");
