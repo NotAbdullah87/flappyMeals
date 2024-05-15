@@ -16,7 +16,7 @@ const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTo
 
 const port = 3000;
 
- await client.connect();
+ client.connect();
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.get("/items", async (req, res) => {
