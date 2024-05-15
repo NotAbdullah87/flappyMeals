@@ -1,10 +1,10 @@
 const express = require('express')
 const MongoClient = require("mongodb").MongoClient;
-const cors = require("cors");
+// const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express()
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json()); // apply body-parser middleware
 
 const PORT = 4000
