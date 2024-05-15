@@ -7,7 +7,7 @@ const app = Express();
 app.use(cors());
 app.use(bodyParser.json()); // apply body-parser middleware
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+
 
 
 const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=flappyMeals";
@@ -28,7 +28,9 @@ app.listen(port, async () => {
 
         // Define your routes and middleware here
         
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
+        
 app.get("/items", async (req, res) => {
     try {
         collection = database.collection("items");
