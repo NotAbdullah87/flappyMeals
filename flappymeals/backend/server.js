@@ -304,4 +304,7 @@ app.post('/Customersignup', async (req, res) => {
 });
 
 
+module.exports = app
+
+
 
