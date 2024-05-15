@@ -14,7 +14,7 @@ const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.ne
 
 // const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const port = 4000;
+const PORT = 4000;
 
 
 app.get('/home', (req, res) => {
