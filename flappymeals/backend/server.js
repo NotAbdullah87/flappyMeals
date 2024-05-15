@@ -1,11 +1,10 @@
 
 const Express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = Express();
-app.use(cors());
+
 app.use(bodyParser.json()); // apply body-parser middleware
 
 
@@ -13,7 +12,7 @@ app.use(bodyParser.json()); // apply body-parser middleware
 
 const connString = "mongodb+srv://admin:flappy123@flappymeals.xkolew3.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=flappyMeals";
 
-const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
+// const client = new MongoClient(connString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const port = 3000;
 
