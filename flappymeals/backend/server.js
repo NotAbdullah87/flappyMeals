@@ -18,29 +18,29 @@ const port = 3000;
  client.connect();
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-// app.get("/items", async (req, res) => {
-// try {
+app.get("/items", async (req, res) => {
+try {
 
  
 
-// console.log("Connected to MongoDB");
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
   
-// collection = database.collection("items");
-// // Retrieve items from the MongoDB collection
-// const items = await collection.find({}).toArray();
-// // console.log(items);
-// // Send the items as a response
-// console.log("getItems() Function");
-// res.json(items);
+collection = database.collection("items");
+// Retrieve items from the MongoDB collection
+const items = await collection.find({}).toArray();
+// console.log(items);
+// Send the items as a response
+console.log("getItems() Function");
+res.json(items);
 
-// } catch (error) {
-// console.error("Error retrieving items:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+} catch (error) {
+console.error("Error retrieving items:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 // app.post("/CurrentOrderForUser", async (req, res) => {
 // try {
