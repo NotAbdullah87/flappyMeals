@@ -26,7 +26,7 @@ const Login = () => {
 
     try {
       // Send a POST request to the login endpoint
-      const response = await axios.post('http://localhost:5038/login', { username: email, password });
+      const response = await axios.post('https://flappy-meals-backend.vercel.app/login', { username: email, password });
       
       // If login is successful, log the user details
       console.log('Login successful:', response.data);

@@ -42,7 +42,7 @@ const CustomerSignup = () => {
    if(isValidFormat(username)){
         
     try {
-        const response = await fetch('http://localhost:5038/Customersignup', {
+        const response = await fetch('https://flappy-meals-backend.vercel.app/Customersignup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ export const Products = () => {
       // Fetch items from the API
       const fetchItems = async () => {
           try {
-              const response = await axios.get('http://localhost:5038/items');
+              const response = await axios.get('https://flappy-meals-backend.vercel.app/items');
               setFoodItems(response.data);
           } catch (error) {
               console.error('Error fetching items:', error);

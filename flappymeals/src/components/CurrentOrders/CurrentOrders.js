@@ -9,7 +9,7 @@ const CurrentOrders = () => {
 
     const updateOrderStatus = async (orderId, riderId,orderStatus) => {
       try {
-          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus});
+          const response = await axios.post('https://flappy-meals-backend.vercel.app/updateOrderStatus', { orderId, riderId, orderStatus});
           console.log('Order status updated successfully:', response.data);
           return response.data; // Return the response data if needed
       } catch (error) {
@@ -23,7 +23,7 @@ const CurrentOrders = () => {
         
         const fetchAvailableOrders = async () => {
             try {
-              const response = await axios.get('http://localhost:5038/orders/available');
+              const response = await axios.get('https://flappy-meals-backend.vercel.app/orders/available');
               const or = response.data;
               console.log('Orders with null rider:', or);
               setOrders(or);

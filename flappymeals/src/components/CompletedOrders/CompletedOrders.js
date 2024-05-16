@@ -15,7 +15,7 @@ const CompletedOrders = () => {
                 const rider = JSON.parse(localStorage.getItem("rider"));
                 const riderId = rider.rider_id;
                 console.log(riderId);
-                const response = await axios.get(`http://localhost:5038/completedOrders?riderId=${riderId}`);
+                const response = await axios.get(`https://flappy-meals-backend.vercel.app/completedOrders?riderId=${riderId}`);
                 setOrders(response.data);
                 console.log(orders)
             } catch (error) {

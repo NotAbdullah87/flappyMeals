@@ -42,7 +42,7 @@ import { useNavigate } from 'react-router-dom';
         // Fetch items from the API
         const fetchItems = async () => {
             try {
-                const response = await axios.get('http://localhost:5038/items');
+                const response = await axios.get('https://flappy-meals-backend.vercel.app/items');
                 setFoodItems(response.data);
             } catch (error) {
                 console.error('Error fetching items:', error);
@@ -59,7 +59,7 @@ import { useNavigate } from 'react-router-dom';
             customerId = customerId.username;
             // customerId = "21L1790";
               // Send a POST request to the orders endpoint with the customerId in the body
-              const response = await axios.post('http://localhost:5038/CurrentOrderForUser', { customerId });
+              const response = await axios.post('https://flappy-meals-backend.vercel.app/CurrentOrderForUser', { customerId });
               
               // Save the returned orders in the currentOrders array
               const currentOrders = response.data;
@@ -89,7 +89,7 @@ import { useNavigate } from 'react-router-dom';
 
     const updateOrderStatus = async (orderId, riderId) => {
       try {
-          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus: 'Completed' });
+          const response = await axios.post('https://flappy-meals-backend.vercel.app/updateOrderStatus', { orderId, riderId, orderStatus: 'Completed' });
           console.log('Order status updated successfully:', response.data);
       } catch (error) {
           console.error('Error updating order status:', error);

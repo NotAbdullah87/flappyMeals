@@ -42,7 +42,7 @@ const RiderSignup = () => {
    if(isValidFormat(username)){
         
     try {
-        const response = await fetch('http://localhost:5038/Ridersignup', {
+        const response = await fetch('https://flappy-meals-backend.vercel.app/Ridersignup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

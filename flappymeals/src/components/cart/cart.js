@@ -98,7 +98,7 @@ const Cart = () => {
         specialInstructions: specialInstructions
       };
   
-      const response = await axios.post('http://localhost:5038/saveOrder', orderData);
+      const response = await axios.post('https://flappy-meals-backend.vercel.app/saveOrder', orderData);
   
       console.log('Order saved successfully:', response.data);
 

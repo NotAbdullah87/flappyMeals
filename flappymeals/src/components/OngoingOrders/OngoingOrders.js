@@ -7,7 +7,7 @@ const OngoingOrders = () => {
 
     const updateOrderStatus = async (orderId, riderId,orderStatus) => {
       try {
-          const response = await axios.post('http://localhost:5038/updateOrderStatus', { orderId, riderId, orderStatus});
+          const response = await axios.post('https://flappy-meals-backend.vercel.app/updateOrderStatus', { orderId, riderId, orderStatus});
           console.log('Order status updated successfully:', response.data);
           return response.data; // Return the response data if needed
       } catch (error) {
@@ -23,7 +23,7 @@ const OngoingOrders = () => {
               const rider = JSON.parse(localStorage.getItem("rider"));
               riderId=rider.rider_id
               console.log(riderId);
-                const response = await axios.post('http://localhost:5038/ongoingOrders', { riderId });
+                const response = await axios.post('https://flappy-meals-backend.vercel.app/ongoingOrders', { riderId });
                 
                 const OngoingOrders = response.data;
 
