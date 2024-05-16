@@ -157,7 +157,7 @@ app.post('/Ridersignup', async (req, res) => {
 console.log("Connected to MongoDB");
 
 const database = client.db("flappyMeals");
-let collection = database.collection("items");
+// let collection = database.collection("items");
 
 const { username, password } = req.body;
 const collection = database.collection("rider");
@@ -191,7 +191,7 @@ app.post('/Customersignup', async (req, res) => {
 console.log("Connected to MongoDB");
 
 const database = client.db("flappyMeals");
-let collection = database.collection("items");
+// let collection = database.collection("items");
 const { username, password } = req.body;
 const collection = database.collection("customer");
 // Check if username already exists
@@ -254,7 +254,7 @@ try {
 console.log("Connected to MongoDB");
 
 const database = client.db("flappyMeals");
-let collection = database.collection("items");
+// let collection = database.collection("items");
  
 const { riderId } = req.query; // Use req.query to access query parameters
 // Retrieve orders from the MongoDB collection
