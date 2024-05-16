@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Image from './Vector.png'; 
+import VImage from './Vector.png'; 
 import MobileImage from './mobile.png';
 import 'animate.css' 
 import { useEffect } from 'react';
@@ -66,16 +66,33 @@ function Hero() {
           </Container>
         </Box>
         <Box  sx={{ flex: '1 1 100%', maxWidth: { xs: '100%', md: '50%' }, position: 'relative', textAlign: { xs: 'center', md: 'right' } }}>
-          <img className='animate__animated animate__fadeInUp' src={Image} alt="Delivery" style={{ width: '100%', height: 'auto' }} />
-          <img src={MobileImage} alt="Mobile" style={{ position: 'absolute', top :'94%', left: '-90%', width: 'auto', height: '400px', zIndex: 1 }} />
+          <img className='animate__animated animate__fadeInUp' src={VImage} alt="Delivery" style={{ width: '100%', height: 'auto' }} />
+    
+        {/* <img src={MobileImage} alt="Mobile" style={{ position: 'absolute', top :'94%'  ,width: 'auto', height: '400px', zIndex: 1 }} /> */}
+        
         </Box>
       </Container>
  
 
+   
+      <Box
+  component="img"
+  sx={{
+    position:"absolute",
+    width:'auto',
+    height:{md:'400px',xs:'350px'},
+    top:"60%",
+    left:{xs:'20%',md:'10%'},
+    zIndex:1
 
-      <Box sx={{ position: 'relative', backgroundColor: '#D91919', py:  { xs: 4, md: 11 }, borderRadius: '80px', textAlign: '-webkit-left', mx: { xs: 3, md: '95px' } ,  clipPath: 'polygon(0 0, 10% 0, 500% 100%, 0% 100%)'}}>
+  }}
+  alt="MobileImageHeroSection"
+  src={MobileImage}
+/>
+
+      <Box sx={{ position: 'relative',mt:{xs:'60%',md:'0%'} ,backgroundColor: '#D91919', py:  { xs: 4, md: 11 }, borderRadius: '80px', textAlign: '-webkit-left', mx: { xs: 3, md: '95px' } ,  clipPath: 'polygon(0 0, 10% 0, 500% 100%, 0% 100%)'}}>
         <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', maxWidth: '80%' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', pt:{xs:"100px",md:'0px'} }}>
         <Typography variant="body1" color="white">
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', fontFamily: 'Josefin Sans', fontStyle: 'italic', fontSize: { xs: '1.5rem', md: '2rem' } }}>
             Easy Steps to Order :
