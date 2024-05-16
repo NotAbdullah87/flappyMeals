@@ -157,10 +157,10 @@ const RiderDashboardHeader = () => {
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'Jomhuria',
-              fontWeight: 600,
-              letterSpacing: '.2rem',
+              fontWeight: 500,
+              letterSpacing: '.1rem',
               color: 'inherit',
-              fontSize: 40,
+              fontSize: 60,
               textDecoration: 'none',
             }}
           >

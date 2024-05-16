@@ -49,8 +49,8 @@ const Login = () => {
         <Header/>
         <Container sx={{textAlign:"center"}}>
         <Typography sx={{fontFamily:"Josefin Sans",fontWeight:600,color:"#D91919"}}>Testing Accounts :</Typography>
-        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>username : 21L7732</Typography>
-        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>password : 1234</Typography>
+        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>username : 21L5197</Typography>
+        <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>password : 123</Typography>
         </Container>
     <Container className='animate__animated animate__slideInLeft' component="main" maxWidth="xs" sx={{marginBottom:{s:'10vh'}}} style={{ marginTop:"12vh",marginBottom:"10vh", display: 'flex', justifyContent: 'center' }}>
       <Paper elevation={3} style={{ padding: '20px' }}>
