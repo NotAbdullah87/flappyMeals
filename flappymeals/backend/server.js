@@ -116,38 +116,38 @@ res.status(500).json({ error: "Internal server error" });
 // }
 // });
 
-// // Define a route for user login
-// app.post("/login", async (req, res) => {
-// try {
+// Define a route for user login
+app.post("/login", async (req, res) => {
+try {
 
-//   // await client.connect();
-// console.log("Connected to MongoDB");
+  // await client.connect();
+console.log("Connected to MongoDB");
 
-// const database = client.db("flappyMeals");
-// let collection = database.collection("items");
+const database = client.db("flappyMeals");
+let collection = database.collection("items");
  
-// collection = database.collection("customer");
-// // console.log(req.body);
-// const items = await collection.find({}).toArray();
-// console.log(items);
-// // Extract username and password from request body
-// const { username, password } = req.body;
-// console.log(username,password);
-// // Check if username and password match
-// const user = await collection.findOne({ username, password });
+collection = database.collection("customer");
+// console.log(req.body);
+const items = await collection.find({}).toArray();
+console.log(items);
+// Extract username and password from request body
+const { username, password } = req.body;
+console.log(username,password);
+// Check if username and password match
+const user = await collection.findOne({ username, password });
 
-// // If user is found, send success response
-// if (user) {
-// res.status(200).json({ message: "Login successful", user });
-// } else {
-// // If user is not found, send failure response
-// res.status(401).json({ message: "Invalid username or password" });
-// }
-// } catch (error) {
-// console.error("Error during login:", error);
-// res.status(500).json({ error: "Internal server error" });
-// }
-// });
+// If user is found, send success response
+if (user) {
+res.status(200).json({ message: "Login successful", user });
+} else {
+// If user is not found, send failure response
+res.status(401).json({ message: "Invalid username or password" });
+}
+} catch (error) {
+console.error("Error during login:", error);
+res.status(500).json({ error: "Internal server error" });
+}
+});
 
 
 // app.post('/Ridersignup', async (req, res) => {
@@ -473,31 +473,31 @@ res.status(500).json({ error: "Internal server error" });
 // // }
 // // });
 
-// // // Define a route for user login
-// // app.post("/login", async (req, res) => {
-// // try {
-// // collection = database.collection("customer");
-// // // console.log(req.body);
-// // const items = await collection.find({}).toArray();
-// // console.log(items);
-// // // Extract username and password from request body
-// // const { username, password } = req.body;
-// // console.log(username,password);
-// // // Check if username and password match
-// // const user = await collection.findOne({ username, password });
+// // Define a route for user login
+// app.post("/login", async (req, res) => {
+// try {
+// collection = database.collection("customer");
+// // console.log(req.body);
+// const items = await collection.find({}).toArray();
+// console.log(items);
+// // Extract username and password from request body
+// const { username, password } = req.body;
+// console.log(username,password);
+// // Check if username and password match
+// const user = await collection.findOne({ username, password });
 
-// // // If user is found, send success response
-// // if (user) {
-// // res.status(200).json({ message: "Login successful", user });
-// // } else {
-// // // If user is not found, send failure response
-// // res.status(401).json({ message: "Invalid username or password" });
-// // }
-// // } catch (error) {
-// // console.error("Error during login:", error);
-// // res.status(500).json({ error: "Internal server error" });
-// // }
-// // });
+// // If user is found, send success response
+// if (user) {
+// res.status(200).json({ message: "Login successful", user });
+// } else {
+// // If user is not found, send failure response
+// res.status(401).json({ message: "Invalid username or password" });
+// }
+// } catch (error) {
+// console.error("Error during login:", error);
+// res.status(500).json({ error: "Internal server error" });
+// }
+// });
 
 // // // Define a route for rider login
 // // app.post("/RiderLogin", async (req, res) => {
