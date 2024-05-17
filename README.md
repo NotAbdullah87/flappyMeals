@@ -51,4 +51,3 @@ This project is licensed under the MIT License.
 
 ---
 
-Make sure to replace placeholders like `yourusername` and `your email` with your actual GitHub username and contact email.
