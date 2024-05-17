@@ -8,7 +8,7 @@ import MobileImage from './mobile.png';
 import 'animate.css' 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-
+import DeveloperSection from '../Developers/developers';
 
 function Hero() {
 
@@ -73,15 +73,17 @@ function Hero() {
         </Box>
       </Container>
  
+{/* DEVELOPERS SECTION */}
+   <DeveloperSection />
 
-   
+
       <Box
   component="img"
   sx={{
     position:"absolute",
     width:'auto',
-    height:{md:'400px',xs:'350px'},
-    top:"60%",
+    height:{md:'400px',xs:'300px'},
+    top:{md:"60%",xs:"73%",sm:"77%",},
     left:{xs:'20%',md:'10%'},
     zIndex:1
 
