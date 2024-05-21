@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardMedia, Button , CircularProgress } from '@mui/material';
 import axios from 'axios';
 
 const OngoingOrders = () => {
@@ -67,9 +67,13 @@ const OngoingOrders = () => {
       updateOrderStatus(orderId,rider.rider_id,'PendingApproval');
     };
     if(orders.length === 0){
-        return   <Container maxWidth="md" sx={{ marginTop: 4 }}>
+        return   <Container maxWidth="md" sx={{ marginTop: 4}}>
+       
         <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Ongoing Orders</Typography>
-        <Typography>No Ongoing Orders</Typography>
+        <Container sx={{textAlign:"center"}}>
+        <CircularProgress sx={{color:"#D91919"}}/>
+        <Typography sx={{ fontFamily: "Josefin Sans", fontWeight: 600, color: "#D91919" }}>No Ongoing Orders</Typography>
+        </Container>
         </Container>
     }else{
 

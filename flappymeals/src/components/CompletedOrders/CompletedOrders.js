@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardMedia , CircularProgress } from '@mui/material';
 import RiderDashboardHeader from '../RiderDashboardHeader/RiderDashboardHeader';
 import Footer from '../Footer/footer';
 import axios from 'axios'; // Import Axios for making HTTP requests
@@ -60,7 +60,14 @@ const CompletedOrders = () => {
     
 
     if(orders.length === 0){
-        return <div>Loading ...... </div>
+        return   <Container sx={{textAlign:"center"}}>
+          <RiderDashboardHeader />
+          <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
+         
+        <CircularProgress sx={{color:"#D91919"}}/>
+        <Typography sx={{ fontFamily: "Josefin Sans", fontWeight: 600, color: "#D91919" }}>Loading .....  </Typography>
+        <Footer />
+        </Container>
     }else{
     return (
       

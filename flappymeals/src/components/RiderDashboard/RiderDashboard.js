@@ -53,24 +53,24 @@ const RiderDashboard = () => {
                     <Typography variant="h4" gutterBottom sx={{ fontFamily: "Jomhuria", fontSize: '5rem', color: "#D91919" }}>Dashboard</Typography>
                     <Grid container spacing={2} sx={{ textAlign: 'center' , borderRadius:"20px" , backgroundColor:"#F9F9F9"}}>
                         <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center'}}>
-                            <AttachMoneyIcon fontSize="large" sx={{ color: 'black', fontSize: '4rem' }} />
+                            <AttachMoneyIcon fontSize="large" sx={{ color: '#D91919', fontSize: '4rem' }} />
                             <Typography variant="h5" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Total Earnings</Typography>
-                            <Typography variant="h4" color="black">{totalEarnings} PKR</Typography>
+                            <Typography variant="h4" color="black" sx={{fontFamily:"Josefin Sans"}}>{totalEarnings} PKR</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-                            <ListAltIcon fontSize="large" sx={{ color: 'black', fontSize: '4rem' }} />
+                            <ListAltIcon fontSize="large" sx={{ color: '#D91919', fontSize: '4rem' }} />
                             <Typography variant="h5" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Pending Orders</Typography>
-                            <Typography variant="h4" color="black">{pendingOrders}</Typography>
+                            <Typography variant="h4" color="black" sx={{fontFamily:"Josefin Sans"}}>{pendingOrders}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-                            <DoneAllIcon fontSize="large" sx={{ color: 'black', fontSize: '4rem' }} />
+                            <DoneAllIcon fontSize="large" sx={{ color: '#D91919', fontSize: '4rem' }} />
                             <Typography variant="h5" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Completed Orders</Typography>
-                            <Typography variant="h4" color="black">{completedOrders}</Typography>
+                            <Typography variant="h4" color="black" sx={{fontFamily:"Josefin Sans"}}>{completedOrders}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-                            <StarIcon fontSize="large" sx={{ color: 'black', fontSize: '4rem' }} />
+                            <StarIcon fontSize="large" sx={{ color: '#FFD700', fontSize: '4rem' }} />
                             <Typography variant="h5" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Ratings</Typography>
-                            <Typography variant="h4" color="black">{ratings}</Typography>
+                            <Typography variant="h4" color="black" sx={{fontFamily:"Josefin Sans"}}>  {ratings}</Typography>
                         </Grid>
                     </Grid>
                    

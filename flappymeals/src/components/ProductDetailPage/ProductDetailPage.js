@@ -1,27 +1,31 @@
 import React, {  useState } from 'react';
-import {Typography,TextField,Grid,Button ,Paper} from '@mui/material';
+import {Typography,TextField,Grid,Button ,Paper,Box,CircularProgress} from '@mui/material';
 import { useLocation } from 'react-router';
 import UserDashboardHeader from '../userDashboardHeader/userDashboardHeader';
 import Footer from '../Footer/footer';
-
-
+import Modal from '@mui/material/Modal';
+import { Link } from 'react-router-dom';
 
 
 const ProductDetailPage = () => {
 
-
+  const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [loadingText,setLoadingText] = useState("Please Wait ...");
 
   const location = useLocation();
   const { state } = location;
   const price = state.price
   // const id = state.id ;
   const name = state.name ; 
-  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   // Ensure state is not null and price is accessible
 // Function to add item to cart array in local storage
 const addToCart = (item,q) => {
   // console.log(quantity);
+
+  setOpen(true)
   console.log(q);
   console.log(item);
   console.log(localStorage);
@@ -52,6 +56,41 @@ const addToCart = (item,q) => {
    return (
     <div>
       <UserDashboardHeader />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        // aria-labelledby="modal-modal-title"
+        // aria-describedby="modal-modal-description"
+        style={{ backdropFilter: "blur(0px)",
+    
+   }}
+      >
+        <Box sx={{  position: "absolute",
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  p:4,
+  background:"white",
+  borderRadius:"10px"
+        }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{fontFamily:"Josefin Sans",fontWeight:900,color:"#D91919"}}>
+           Order Successful !! 
+          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{fontFamily:"Josefin Sans",fontWeight:900,color:"#D91919"}}>
+           Check your Cart To Proceed Further
+          </Typography>
+          <Button
+        type="submit"
+        // fullWidth
+        variant="contained"
+       
+        style={{ margin: '20px 0 16px',backgroundColor:"#D91919" , '&:hover':{backgroundColor :"black"} }}
+      >
+        <Link to='/userDashboard/viewCart' style={{textDecoration:"none",color:"white",fontFamily:"Josefin Sans"}}>View Cart</Link>
+      </Button>
+        </Box>
+      </Modal>
     <div style={{ padding: '16px',marginTop:"10vw" }}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} style={{textAlign:"center"}}>
@@ -80,6 +119,11 @@ const addToCart = (item,q) => {
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{
+                min: 1, // Set your desired min value
+                max: 10, // Set your desired max value
+              }}
+              // width={'100%'}
               value={quantity}
               onChange={handleQuantityChange}
               

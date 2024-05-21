@@ -1,7 +1,7 @@
 // Login.js
 
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Typography, Container, Paper } from '@mui/material';
+import { TextField, Button, Grid, Typography, Container, Paper,CircularProgress } from '@mui/material';
 import Header from '../Header/header';
 import Footer from '..//Footer/footer';
 import 'animate.css'
@@ -14,12 +14,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
+  const [loadingCircleStatus,setLoadingCircleStatus] = useState("none");
+  const [loadingText,setLoadingText] = useState("Loading ...");
   const navigate = useNavigate();
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic
+    setLoadingCircleStatus("")
     console.log('Email:', email);
     console.log('Password:', password);
     
@@ -37,6 +40,7 @@ const Login = () => {
       // Redirect user to dashboard or perform any other action
   } catch (error) {
       // If login fails, log the error message
+      setLoadingText("Login Failed")
       console.error('Login failed:', error.response.data.message);
       setLoginStatus("failed");
       // Show error message to the user
@@ -47,7 +51,22 @@ const Login = () => {
   return (
     <div>
         <Header/>
+
+        <Container sx={{textAlign:"center",zIndex:1,
+         width:"15rem",padding:"20px",top:"20rem",position:"absolute",display:loadingCircleStatus
+        ,left:{xs:"20vh",sm:"42vw"}  }} style={{ background: 'rgba(255, 255, 255, 0.25)',
+  boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+  backdropFilter: 'blur(6px)',
+  WebkitBackdropFilter: 'blur(6px)',
+  borderRadius: '10px',
+  border: '1px solid rgba(255, 255, 255, 0.18)',}}>
+        <CircularProgress sx={{color:"#D91919"}} />
+        <Typography sx={{fontFamily:"Josefin Sans",fontWeight:600,color:"#D91919"}}>{loadingText}</Typography>
+     
+        </Container>
+        
         <Container sx={{textAlign:"center"}}>
+   
         <Typography sx={{fontFamily:"Josefin Sans",fontWeight:600,color:"#D91919"}}>Testing Accounts :</Typography>
         <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>username : 21L5197</Typography>
         <Typography sx={{fontFamily:"Josefin Sans",color:"#D91919"}}>password : 123</Typography>
@@ -91,7 +110,7 @@ const Login = () => {
             type="submit"
             fullWidth
             variant="contained"
-           
+           onClick={handleSubmit}
             style={{ margin: '24px 0 16px',backgroundColor:"#D91919" , '&:hover':{backgroundColor :"black"} }}
           >
             <Link style={{textDecoration:"none",color:"white"}}>Sign In</Link>

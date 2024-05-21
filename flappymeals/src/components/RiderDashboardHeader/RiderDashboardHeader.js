@@ -141,7 +141,7 @@ const RiderDashboardHeader = () => {
               <MenuItem onClick={handleCloseNavMenu} style={{ color: "inherit" }}>
                 <Typography textAlign="center">
                   <Link style={{ textDecoration: "none", color: "black" }} 
-                  to={'/riderDashboard/notifications'}>Notifications</Link>
+                  to={'/riderDashboard'}>Notifications</Link>
                 </Typography>
               </MenuItem>
             </Menu>

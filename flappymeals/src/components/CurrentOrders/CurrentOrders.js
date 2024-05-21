@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardMedia, Button  , CircularProgress  } from '@mui/material';
 import axios from 'axios';
 import Icon from './img.png';
 
@@ -76,11 +76,14 @@ const CurrentOrders = () => {
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
     if(orders.length === 0){
-      return  <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      {/* {console.log(orders)} */}
-            <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
-          <Typography>No Current Orders Yet ..... </Typography>
-</Container>
+      return    <Container maxWidth="md" sx={{ marginTop: 4}}>
+       
+      <Typography variant="h3" gutterBottom sx={{ fontFamily: "Josefin Sans", fontWeight: 900, color: "#D91919" }}>Current Orders</Typography>
+      <Container sx={{textAlign:"center"}}>
+      <CircularProgress sx={{color:"#D91919"}}/>
+      <Typography sx={{ fontFamily: "Josefin Sans", fontWeight: 600, color: "#D91919" }}>No Current Orders .... </Typography>
+      </Container>
+      </Container>
       
     }else {
     return (
